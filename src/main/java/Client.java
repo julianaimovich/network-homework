@@ -6,14 +6,11 @@ import java.net.Socket;
 
 public class Client {
 
-    public static void main(String[] args) {
-        try (Socket clientSocket = new Socket("127.0.0.1", Server.PORT)) {
-            PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            writer.println("Donovan");
-            System.out.println(reader.readLine());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public static void main(String[] args) throws IOException {
+        Socket clientSocket = new Socket("localhost", Server.PORT);
+        PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        writer.println("Donovan");
+        System.out.println(reader.readLine());
     }
 }
